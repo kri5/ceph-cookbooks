@@ -5,7 +5,11 @@ driver_config:
 
 platforms:
 - name: ubuntu-10.04
+  run_list:
+    - recipe[apt]
 - name: ubuntu-12.04
+  run_list:
+    - recipe[apt]
 - name: centos-6.4
 - name: centos-5.9
 
@@ -39,3 +43,6 @@ suites:
   run_list:
     - "role[ceph-radosgw]"
   attributes: *defaults
+- name: aio
+  run_list:
+    - recipe[ceph::all_in_one]

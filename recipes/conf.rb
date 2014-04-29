@@ -1,5 +1,10 @@
-fail 'fsid must be set in config' if node['ceph']['config']['fsid'].nil?
-fail 'mon_initial_members must be set in config' if node['ceph']['config']['mon_initial_members'].nil?
+#fail 'mon_initial_members must be set in config' if node['ceph']['config']['mon_initial_members'].nil?
+
+unless node['ceph']['config']['fsid']
+  Chef::Log.warn('We are genereting a new uuid for fsid')
+  require 'securerandom'
+  node.set['ceph']['config']['fsid'] = SecureRandom.uuid
+end
 
 directory '/etc/ceph' do
   owner 'root'

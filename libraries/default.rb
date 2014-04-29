@@ -16,7 +16,7 @@ def get_mon_nodes(extra_search = nil)
     search_string = "ceph_is_mon:true AND chef_environment:#{node.chef_environment}"
   end
 
-  unless extra_search.nil?
+  if extra_search
     search_string = "(#{search_string}) AND (#{extra_search})"
   end
   search(:node, search_string)
