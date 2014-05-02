@@ -4,6 +4,7 @@ unless node['ceph']['config']['fsid']
   Chef::Log.warn('We are genereting a new uuid for fsid')
   require 'securerandom'
   node.set['ceph']['config']['fsid'] = SecureRandom.uuid
+  node.save
 end
 
 directory '/etc/ceph' do
@@ -15,9 +16,11 @@ end
 
 template '/etc/ceph/ceph.conf' do
   source 'ceph.conf.erb'
-  variables(
-    :mon_addresses => mon_addresses,
-    :is_rgw => node['ceph']['is_radosgw']
-  )
+  variables lazy {
+    {
+      :mon_addresses => mon_addresses,
+      :is_rgw => node['ceph']['is_radosgw']
+    }
+  }
   mode '0644'
 end

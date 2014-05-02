@@ -14,6 +14,7 @@
 #  different and are created in
 #  /var/lib/ceph/bootstrap-{osd,mds}/ceph.keyring
 
+include_recipe 'ceph::_common'
 include_recipe 'ceph::default'
 include_recipe 'ceph::conf'
 
