@@ -1,6 +1,7 @@
 ---
 driver_plugin: vagrant
 driver_config:
+  vagrantfile_erb: test/integration/Vagrantfile.erb
   require_chef_omnibus: true
 
 platforms:
@@ -44,5 +45,11 @@ suites:
     - "role[ceph-radosgw]"
   attributes: *defaults
 - name: aio
+  attributes:
+    ceph:
+      osd_devices:
+        - { device: "/dev/sdb" }
+        - { device: "/dev/sdc" }
+        - { device: "/dev/sdd" }
   run_list:
     - recipe[ceph::all_in_one]
