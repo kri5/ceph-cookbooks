@@ -23,7 +23,7 @@ include_recipe 'ceph::conf'
 
 cluster = 'ceph'
 
-directory "/var/lib/ceph/mds/#{cluster}-#{node["hostname"]}" do
+directory "/var/lib/ceph/mds/#{cluster}-#{node['hostname']}" do
   owner 'root'
   group 'root'
   mode 00755
@@ -37,7 +37,7 @@ ceph_client 'mds' do
   filename "/var/lib/ceph/mds/#{cluster}-#{node['hostname']}/keyring"
 end
 
-file "/var/lib/ceph/mds/#{cluster}-#{node["hostname"]}/done" do
+file "/var/lib/ceph/mds/#{cluster}-#{node['hostname']}/done" do
   owner 'root'
   group 'root'
   mode 00644
@@ -51,7 +51,7 @@ when 'upstart'
 else
   filename = 'sysvinit'
 end
-file "/var/lib/ceph/mds/#{cluster}-#{node["hostname"]}/#{filename}" do
+file "/var/lib/ceph/mds/#{cluster}-#{node['hostname']}/#{filename}" do
   owner 'root'
   group 'root'
   mode 00644
