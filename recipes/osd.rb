@@ -56,7 +56,7 @@ end
 cluster = 'ceph'
 
 execute 'format as keyring' do
-  command "ceph-authtool '/var/lib/ceph/bootstrap-osd/#{cluster}.keyring' --create-keyring --name=client.bootstrap-osd --add-key='#{osd_secret}'"
+  command lazy "ceph-authtool '/var/lib/ceph/bootstrap-osd/#{cluster}.keyring' --create-keyring --name=client.bootstrap-osd --add-key='#{osd_secret}'"
   creates "/var/lib/ceph/bootstrap-osd/#{cluster}.keyring"
   only_if { osd_secret }
 end

@@ -27,7 +27,7 @@ def osd_secret
     secret = Chef::EncryptedDataBagItem.load_secret(node['ceph']['osd']['secret_file'])
     return Chef::EncryptedDataBagItem.load('ceph', 'osd', secret)['secret']
   else
-    return  mon_nodes[0]['ceph']['bootstrap_osd_key']
+    return mon_nodes[0]['ceph']['bootstrap_osd_key']
   end
 end
 
