@@ -47,6 +47,9 @@ suites:
 - name: aio
   attributes:
     ceph:
+      config-sections:
+        global:
+          "osd journal size" : 128
       osd_devices:
         - { device: "/dev/sdb" }
         - { device: "/dev/sdc" }
